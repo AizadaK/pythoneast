@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block page %}
+
+    <h2>You are welcome!</h2>
+    {{ request.user }} = {{ request.user.is_authenticated }}
+    
+{% endblock %}
