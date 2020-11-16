@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import publications
+from .models import Publication
 
 def all_publications(request):
     pubs = Publication.objects.all()
