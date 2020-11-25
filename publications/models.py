@@ -1,6 +1,6 @@
 from django.db import models
-
 from core.models import BaseModel
+
 
 class Publication(BaseModel):
     text = models.TextField(
@@ -10,5 +10,6 @@ class Publication(BaseModel):
 
     image = models.ImageField(
         null=True, blank=True,
-        verbose_name="Картинка публикации"
+        verbose_name="Картинка публикации",
+        upload_to="publication_pictures"
     )
