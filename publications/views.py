@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 from .models import Publication
+from .forms import PublicationForm
 
 def all_publications(request):
     pubs = Publication.objects.all()
@@ -20,4 +21,18 @@ def create_publication(request):
         )
         publication.save()
         return redirect('publication', pk=publication.pk)
-    return render(request, "publications/create.html")    
+    return render(request, "publications/create.html")   
+
+def create_form(request):
+    if request.method == "POST":
+        form = PublicationForm(request.POST, request.FILES)
+        if form.is_valid():
+            publication = form.save()
+            return redirect("publication", pk=publication.pk)
+    form = PublicationForm()    
+    return render(request, "publication/create_form.html", {"form" : form})
+
+class PublicationCreateView(CreateView):
+    model = Publication
+    fields = ["name", "text", "image"] 
+    success_url = "/publication/all/"   
